@@ -1,6 +1,6 @@
-import { makeStyles, Theme } from '@mui/styles'
+import { makeStyles } from '@mui/styles'
 
-const useStyles = makeStyles((theme: Theme) => ({
+const useStyles = makeStyles(() => ({
   main: {
     position: 'relative',
     display: 'grid',

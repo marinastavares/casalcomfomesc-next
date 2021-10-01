@@ -25,7 +25,6 @@ const createApolloClient = (headers: IncomingHttpHeaders | null = null) => {
       headers: {
         ...init.headers,
         'Access-Control-Allow-Origin': '*',
-        // 'Authorization': `Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6ImdjbXMtbWFpbi1wcm9kdWN0aW9uIn0.eyJ2ZXJzaW9uIjozLCJpYXQiOjE2MzI1MDA0OTcsImF1ZCI6WyJodHRwczovL2FwaS11cy1lYXN0LTEuZ3JhcGhjbXMuY29tL3YyL2NrdHlnMHc3cjJuenIwMXl1ZXBydDg2dmYvbWFzdGVyIiwiaHR0cHM6Ly9tYW5hZ2VtZW50LW5leHQuZ3JhcGhjbXMuY29tIl0sImlzcyI6Imh0dHBzOi8vbWFuYWdlbWVudC5ncmFwaGNtcy5jb20vIiwic3ViIjoiOGIzM2FiNmQtYjk4MS00YjNkLWE2OWMtZjIxM2ZiYWZmODI5IiwianRpIjoiY2t0eWtuOXduMzB1ZDAxeG1na3B4ZTJxaCJ9.SStphVG2ExKuVIRPj-Mcp2UIdu9YkrnXVlvcsZL-ulSapU32dLrTdRQgkESjlBK4-POblGcLIf9Z36bMoNsqFEZTo2tET6DeAkhSfT0x3tA5p8SLu6hwUGdFyPTanJwj8M38QC_fH3l4duB2cqYuziMsm1ByPrBqiXmP0iUar5S75T-XJ9YVq5-N7iGFZ2-yEq-v4rzj9O2AO9kBMWsT2yIkh-ZtFfUntDBOV20cFtFtP8bGQzEbjumlC-_zGjzQIMcELFYGXMCVhOY97YkMY3mZAyFe6dsch581-tvYou9i6GN1FS-FOFHHVPEesgnH43Yv2RY5rL8Zcu6fQek7tyUWPQ_L5p4Y-As_DQgLM1bB9ePoq46e6cliBe315aomXw2W6HryX7Y38tDKUkjkTn5z1BztfEXGD7Zxm0vhqUnOKl7p12XfUBmx-gbfv2CVMn-9deJyDXE7hF3Th8EFT7yq68jxXVWV0cYiWXNRskkG8bs8UQ3g1TTqYacENG-s77ORdVykZZAb9WduN9H1a8CjPPIuQu-wsCI-XMGyT1XtrBQ9HYbofHKCXx1SEwb4szXaL7-daJ_nSSjOTvBsLLy1dWJ820O7_d57NyuDDHDNAB1Zf764_pdP5aVfMIFnrAJc2I0wJjuD3BpA7jcX-EeZPzSFL44djyrnsTC_ESk`,
         // here we pass the cookie along for each request
         Cookie: headers?.cookie ?? '',
       },

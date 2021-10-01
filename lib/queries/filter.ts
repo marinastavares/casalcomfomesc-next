@@ -98,30 +98,5 @@ export const handleQuery = filter => {
 
 export const getFilterPost = filter =>   {
   const query = handleQuery(filter)
-  console.log("🚀 ~ file: filter.ts ~ line 102 ~ query", query)
   return gql`${query}`
 }
-
-// gql`
-// query getFilterPosts($search: String) {
-//   posts(where: {restaurant: {name_contains: $search} })  {
-//     data
-//     url
-//     thumbnail {
-//       url
-//     }
-//     restaurant {
-//       name
-//       category {
-//         name
-//       }
-//       city {
-//         name
-//       }
-//     }
-//     notaMarina
-//     notaVinicius
-//     tags
-//   }
-// }
-// `

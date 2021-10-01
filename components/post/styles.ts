@@ -1,8 +1,7 @@
 import { makeStyles } from '@mui/styles'
 
-const useStyles = makeStyles(({ palette }) => ({
+const useStyles = makeStyles(() =>  ({
   post: {
-    color: palette.primary.main,
     borderRadius: 12,
     padding: 0,
     display: 'grid',

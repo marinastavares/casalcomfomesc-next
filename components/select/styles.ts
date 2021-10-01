@@ -1,7 +1,7 @@
 import { makeStyles } from '@mui/styles'
 
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(() => ({
   container: {
     display: 'grid',
     gridTemplateColumns: 250,

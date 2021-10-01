@@ -10,19 +10,19 @@ const useFilter = (name: string, getNewPosts: any) => {
   const selected = filter[name]
 
   const handleChange = (value: string) => {
-    if (!selected.includes(value)) {
-      const newSelected = selected.length ? [...selected, value] : [value]
+    if (!selected?.includes(value)) {
+      const newSelected = selected?.length ? [...selected, value] : [value]
       filterVar({ ...filter, [name]: newSelected })
       getNewPosts()
       return
     }
-    const newSelected = selected.filter((option: string) => option !== value)
+    const newSelected = selected?.filter((option: string) => option !== value)
     filterVar({ ...filter, [name]: newSelected })
     getNewPosts()
   }
 
   const handleSelectAll = (options: optionsProps[]) => {
-    if (selected.length === options.length) {
+    if (selected?.length === options.length) {
       filterVar({ ...filter, [name]: [] })
       getNewPosts()
       return

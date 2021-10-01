@@ -36,6 +36,8 @@
     "use-debounce": "^7.0.0"
   },
   "devDependencies": {
+    "@types/apollo-upload-client": "^14.1.0",
+    "@types/lodash": "^4.14.175",
     "@types/react": "17.0.24",
     "@typescript-eslint/eslint-plugin": "^4.31.2",
     "eslint": "7.32.0",
