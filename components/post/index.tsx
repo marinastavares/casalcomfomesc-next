@@ -6,6 +6,7 @@ import TagIcon from '@mui/icons-material/Tag'
 
 import { PostProps } from '../../models/post'
 import { styled } from '@mui/system'
+import useStyles from './styles'
 
 const TotalScore = styled(Typography)({
   fontSize: 10,
@@ -28,9 +29,11 @@ const Hashtag = styled(TagIcon)({
   color: 'white',
 })
 
-import useStyles from './styles'
+interface Post {
+  post: PostProps
+}
 
-const Post = ({ post }: PostProps) => {
+const Post = ({ post }: Post) => {
   const styles = useStyles()
 
   if (!post.url) {
