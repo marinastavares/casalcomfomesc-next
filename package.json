@@ -9,14 +9,39 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@apollo/client": "^3.4.13",
+    "@apollo/link-error": "^2.0.0-beta.3",
+    "@apollo/react-common": "^3.1.4",
+    "@apollo/react-hooks": "^4.0.0",
+    "@emotion/react": "^11.4.1",
+    "@emotion/styled": "^11.3.0",
+    "@material-ui/core": "^4.12.3",
+    "@mui/icons-material": "^5.0.1",
+    "@mui/material": "^5.0.1",
+    "@mui/styles": "^5.0.1",
+    "apollo-boost": "^0.4.9",
+    "apollo-link-ws": "^1.0.20",
+    "apollo-upload-client": "^16.0.0",
+    "clsx": "^1.1.1",
+    "deepmerge": "^4.2.2",
+    "graphql": "^15.6.0",
+    "graphql-request": "^3.5.0",
+    "graphql-upload": "^12.0.0",
+    "isomorphic-unfetch": "^3.1.0",
+    "lodash": "^4.17.21",
     "next": "11.1.2",
     "react": "17.0.2",
-    "react-dom": "17.0.2"
+    "react-dom": "17.0.2",
+    "subscriptions-transport-ws": "^0.9.19",
+    "use-debounce": "^7.0.0"
   },
   "devDependencies": {
     "@types/react": "17.0.24",
+    "@typescript-eslint/eslint-plugin": "^4.31.2",
     "eslint": "7.32.0",
     "eslint-config-next": "11.1.2",
+    "eslint-config-prettier": "^8.3.0",
+    "prettier": "^2.4.1",
     "typescript": "4.4.3"
   }
 }
