@@ -11,7 +11,7 @@ import Post from '../components/post'
 import { PostProps } from '../models/post'
 import { filterVar } from '../lib/cache'
 
-import useStyles from './styles'
+import useStyles from '../styles/styles'
 
 const removeEmptyValues = (payload: any) => {
   const newValues = Object.entries(payload).reduce(
