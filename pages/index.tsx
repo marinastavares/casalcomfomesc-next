@@ -10,6 +10,7 @@ import Select from '../components/select'
 import Post from '../components/post'
 import { PostProps } from '../models/post'
 import { filterVar } from '../lib/cache'
+import Loading from '../components/loading'
 
 import useStyles from '../styles/styles'
 
@@ -32,12 +33,10 @@ const Home: NextPage = () => {
   const [search, setSearch] = useState<string>()
 
   const variables = removeEmptyValues(noFilterData?.filter ?? {})
-  const [getNewPosts, { data: filterData }] = useLazyQuery(
-    getFilterPost(variables),
-    {
+  const [getNewPosts, { data: filterData, loading: isSearchLoading }] =
+    useLazyQuery(getFilterPost(variables), {
       variables,
-    }
-  )
+    })
 
   const debounced = useDebouncedCallback(
     // function
@@ -61,7 +60,7 @@ const Home: NextPage = () => {
     Object.keys(variables).length > 0 ? filterData?.posts : noFilterData?.posts
 
   if (loading) {
-    return null
+    return <Loading />
   }
 
   return (
@@ -82,14 +81,15 @@ const Home: NextPage = () => {
           value={search}
         />
         <Grid className={styles.post}>
-          <Grid className={styles.list}>
-            {/* <Typography variant="h3" color="primary">
-              Posts encontrados
-            </Typography> */}
-            {posts?.map((post: PostProps) => (
-              <Post post={post} key={post.id} />
-            ))}
-          </Grid>
+          {isSearchLoading ? (
+            <Loading />
+          ) : (
+            <Grid className={styles.list}>
+              {posts?.map((post: PostProps) => (
+                <Post post={post} key={post.id} />
+              ))}
+            </Grid>
+          )}
           <Grid>
             <Select
               name="categories"

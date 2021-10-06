@@ -4,7 +4,7 @@ import { ApolloProvider } from '@apollo/client'
 import { ThemeProvider } from '@mui/material/styles'
 
 import theme from '../styles/theme'
-import { useApollo } from '../lib/apolloClient'
+import { useApollo } from '../lib/apolloClient.ts'
 
 const App = ({ Component, pageProps }: AppProps) => {
   const apolloClient = useApollo(pageProps)

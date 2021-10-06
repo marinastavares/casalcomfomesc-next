@@ -34,8 +34,12 @@ const useStyles = makeStyles(() =>  ({
   },
   date: {
     lineHeight: 1,
-    fontSize: 10,
+    fontSize: 12,
     marginLeft: 8,
+  },
+  name: {
+    margin: '4px 0',
+    gap: 4,
   },
   totalScore: {
     fontSize: 4,

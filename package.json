@@ -32,6 +32,8 @@
     "next": "11.1.2",
     "react": "17.0.2",
     "react-dom": "17.0.2",
+    "react-fade-in": "^2.0.1",
+    "react-lottie": "^1.2.3",
     "subscriptions-transport-ws": "^0.9.19",
     "use-debounce": "^7.0.0"
   },

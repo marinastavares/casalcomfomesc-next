@@ -4,7 +4,6 @@ interface IObjectKeys {
 
 
 export interface FilterProps extends IObjectKeys {
-  name: string;
   categories: string[];
   cities: string[];
   search: string,

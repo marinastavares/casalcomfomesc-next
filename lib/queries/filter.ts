@@ -1,5 +1,7 @@
 import { gql } from '@apollo/client'
 
+import {FilterProps} from '../../models/filter'
+
 export const GET_ALL_FILTERS_OPTIONS = gql`
   query getGeneralInfo {
     categories {
@@ -15,7 +17,7 @@ export const GET_ALL_FILTERS_OPTIONS = gql`
       categories
       search
     }
-    posts {
+    posts (orderBy: data_DESC) {
       data
       url
       thumbnail {
@@ -47,7 +49,7 @@ export const GET_LOCAL_FILTER = gql`
   }
 `
 
-export const handleFilterHeader = (filter) => {
+export const handleFilterHeader = (filter: FilterProps) => {
   const header = {query: '', where: ''}
 
   if (filter?.search) {
@@ -55,21 +57,21 @@ export const handleFilterHeader = (filter) => {
     header.where = `name_contains: $search`
   }
   if (filter?.categories) {
-    header.query = `${header.query.length ? ',' : ''} $categories: [String!]`
-    header.where = `${header.where.length ? ',' : ''} { category: { slug_in: $categories } }`
+    header.query = `${header.query.length ? `${header.query},` : ''} $categories: [String!]`
+    header.where = `${header.where.length ? `${header.where},` : ''} category: { slug_in: $categories }`
   }
   if (filter?.cities) {
-    header.query = `${header.query.length ? ',' : ''} $cities: [String!]`
-    header.where = `${header.where.length ? ',' : ''} { city: { slug_in: $cities } }`
+    header.query = `${header.query.length ? `${header.query},`  : ''} $cities: [String!]`
+    header.where = `${header.where.length ? `${header.where},`  : ''} city: { slug_in: $cities }`
   }
   return header
 }
 
-export const handleQuery = filter => {
+export const handleQuery = ( filter: FilterProps) => {
   const header = handleFilterHeader(filter)
 
   const query = header.query.length ? `getFilterPosts(${header.query})` : 'getFilterPosts'
-  const where = header.query.length ? `(where: {restaurant: ${header.where} })` : ''
+  const where = header.query.length ? `(where: {restaurant: {${header.where} }}, orderBy: data_DESC)` : '(orderBy: data_ASC)'
 
   return  `
   query ${query} {
@@ -96,7 +98,7 @@ export const handleQuery = filter => {
 `
 }
 
-export const getFilterPost = filter =>   {
+export const getFilterPost = (filter: FilterProps) =>   {
   const query = handleQuery(filter)
   return gql`${query}`
 }

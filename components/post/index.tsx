@@ -22,6 +22,10 @@ const Tag = styled(Typography)(({ theme }) => ({
   fontSize: 12,
   lineHeight: 1,
 }))
+const VisitedAt = styled(Typography)(({ theme }) => ({
+  fontSize: 12,
+  lineHeight: 1,
+}))
 
 const Hashtag = styled(TagIcon)({
   height: 12,
@@ -65,22 +69,24 @@ const Post = ({ post }: Post) => {
             color="primary"
           />
         </Grid>
-        <Grid container alignItems="center" justifyContent="space-between">
+        <Grid
+          className={styles.name}
+          container
+          direction="column"
+          alignItems="flex-start"
+          justifyContent="space-between"
+        >
           <Typography color="primary" component="h1" variant="h6">
             {post.restaurant.name}
           </Typography>
-          <Typography
-            className={styles.date}
-            color="secondary"
-            component="span"
-            variant="body2"
-          >
+          <VisitedAt color="secondary">
             {new Date(post.data).toLocaleString('pt-BR', {
               year: 'numeric',
               month: '2-digit',
               day: '2-digit',
+              year: '2-digit',
             })}
-          </Typography>
+          </VisitedAt>
         </Grid>
         <Grid className={styles.bottom}>
           <Grid className={styles.progress}>
