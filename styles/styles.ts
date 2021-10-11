@@ -6,11 +6,11 @@ const useStyles = makeStyles((theme: DefaultTheme) => ({
     display: 'grid',
     gridTemplateColumns: '24px 1fr 24px',
     gridTemplateRows: 'auto',
-    gridTemplateAreas: "'header header header' '. search . ' '. filter .' '. post .'",
+    gridTemplateAreas: "'header header header' '. content . '",
   },
   header: {
     gridArea: 'header',
-    backgroundColor: theme.palette.primary.main,
+    backgroundColor: '#ff8f63',
     padding: 32,
     marginBottom: 32,
     display: 'flex',
@@ -18,7 +18,10 @@ const useStyles = makeStyles((theme: DefaultTheme) => ({
     gap: 16,
   },
   titleHeader: {
-    color: theme.palette.primary.contrastText,
+    color: 'white',
+  },
+  content: {
+    gridArea: 'content',
   },
   search: {
     gridArea: 'search',
@@ -53,6 +56,11 @@ const useStyles = makeStyles((theme: DefaultTheme) => ({
   },
   icon: {
     color: 'white',
+  },
+  recommendation: {
+    color: 'white',
+    borderColor: 'white',
+    marginLeft: 'auto',
   }
 }))
 

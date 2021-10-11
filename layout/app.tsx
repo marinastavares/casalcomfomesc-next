@@ -1,15 +1,21 @@
 import type { NextPage } from 'next'
-import { ChangeEvent, useCallback, useState, ReactElement } from 'react'
+import { ChangeEvent, useCallback, useState, ReactNode } from 'react'
+import Head from 'next/head'
+import Image from 'next/image'
 import { useQuery, useLazyQuery, useReactiveVar } from '@apollo/client'
 import { Grid, TextField, Typography, Button } from '@mui/material'
 import { useDebouncedCallback } from 'use-debounce'
 import SearchIcon from '@mui/icons-material/Search'
+import InstagramIcon from '@mui/icons-material/Instagram'
+import { ToastContainer } from 'react-toastify'
 
 import { GET_ALL_FILTERS_OPTIONS, getFilterPost } from '../lib/queries/filter'
 import Post from '../components/post'
 import { PostProps } from '../models/post'
 import { filterVar } from '../lib/cache'
 import Loading from '../components/loading'
+import ProfilePicture from '../assets/foto1.png'
+import useMobileDetect from '../hooks/useMobileAgent'
 import Dialog from '../components/dialog/filter'
 import RecommendationDialog from '../components/dialog/recommendation'
 import Chip from '../components/chip'
@@ -30,8 +36,9 @@ const removeEmptyValues = (payload: any) => {
   return newValues
 }
 
-const Home: NextPage = () => {
+const App = ({ children }: { children: ReactNode }) => {
   const styles = useStyles()
+  const { isMobile } = useMobileDetect()
 
   // Load initial posts
   const { loading, data: noFilterData } = useQuery(GET_ALL_FILTERS_OPTIONS)
@@ -93,74 +100,42 @@ const Home: NextPage = () => {
 
   return (
     <>
-      <TextField
-        placeholder="Busque o restaurante"
-        className={styles.search}
-        size="small"
-        onChange={handleChange}
-        value={search}
-        type="search"
-        fullWidth
-      />
-      <Grid className={styles.filter}>
-        <Button
-          variant="outlined"
-          color="secondary"
-          className={styles.filterButton}
-          onClick={handleRecommendationModal}
-        >
-          Recomendar
-        </Button>
-        <Button
-          startIcon={<SearchIcon />}
-          className={styles.filterButton}
-          variant="outlined"
-          onClick={handleModal}
-        >
-          Mais filtros
-        </Button>
-        {Object.entries(variables).map(([key, typeOfFilter]) =>
-          typeOfFilter.map((value: string) => (
-            <Chip
-              key={value}
-              slug={value}
-              label={noFilterData[key].find((type) => type.slug === value).name}
-              name={key}
-              handleChange={handleRemoveFilter}
-            />
-          ))
-        )}
-      </Grid>
-
-      <Grid className={styles.post}>
-        {isSearchLoading ? (
-          <Loading />
-        ) : (
-          <Grid className={styles.list}>
-            {posts?.length ? (
-              posts?.map((post: PostProps) => (
-                <Post post={post} key={post.id} />
-              ))
-            ) : (
-              <Typography color="primary" component="h1" variant="body1">
-                Ainda não visitamos essas opções
-              </Typography>
-            )}
-          </Grid>
-        )}
-      </Grid>
-      {isModalOpen && (
-        <Dialog
-          isLoading={isSearchLoading}
-          getNewPosts={getNewPosts}
-          onClose={handleModal}
+      <Head>
+        <title>@casalcomfomesc</title>
+        <meta
+          name="description"
+          content="O site que você pode visualizar e filtrar todos os posts feito pelo casal Tavazetta 🍔🍟🍕🌯🍝🍣"
         />
-      )}
-      {isRecommendationModalOpen && (
-        <RecommendationDialog onClose={handleRecommendationModal} />
-      )}
+        <link rel="icon" href="/favicon.ico" />
+      </Head>
+
+      <main className={styles.main}>
+        <Grid className={styles.header}>
+          <Image
+            className={styles.image}
+            height={isMobile ? 120 : 48}
+            width={isMobile ? 120 : 48}
+            src={ProfilePicture}
+            alt="Profile"
+          />
+          <a
+            href="https://www.instagram.com/casalcomfomesc"
+            alt="Nosso instagram"
+            className={styles.icon}
+            target="_blank"
+            rel="noreferrer"
+          >
+            <InstagramIcon />
+          </a>
+          <Typography component="h1" className={styles.titleHeader}>
+            Bem vindo ao portal @casalcomfomesc
+          </Typography>
+        </Grid>{' '}
+        <Grid className={styles.content}>{children}</Grid>
+        <ToastContainer />
+      </main>
     </>
   )
 }
 
-export default Home
+export default App

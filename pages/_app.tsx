@@ -4,8 +4,9 @@ import { ApolloProvider } from '@apollo/client'
 import { ThemeProvider } from '@mui/material/styles'
 
 import theme from '../styles/theme'
-import { useApollo } from '../lib/apolloClient.ts'
+import { useApollo } from '../lib/apolloClient'
 import '../styles/globals.css'
+import AppLayout from '../layout/app'
 
 const App = ({ Component, pageProps }: AppProps) => {
   const apolloClient = useApollo(pageProps)
@@ -21,7 +22,9 @@ const App = ({ Component, pageProps }: AppProps) => {
   return (
     <ApolloProvider client={apolloClient}>
       <ThemeProvider theme={theme}>
-        <Component {...pageProps} />
+        <AppLayout>
+          <Component {...pageProps} />
+        </AppLayout>{' '}
       </ThemeProvider>
     </ApolloProvider>
   )

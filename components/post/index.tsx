@@ -50,6 +50,7 @@ const Post = ({ post }: Post) => {
       className={styles.post}
       target="_blank"
       rel="noreferrer"
+      variant="outlined"
     >
       <Image
         src={post.thumbnail.url}

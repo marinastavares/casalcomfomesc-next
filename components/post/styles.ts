@@ -1,6 +1,6 @@
 import { makeStyles } from '@mui/styles'
 
-const useStyles = makeStyles(() =>  ({
+const useStyles = makeStyles((theme) =>  ({
   post: {
     borderRadius: 12,
     padding: 0,
@@ -9,6 +9,10 @@ const useStyles = makeStyles(() =>  ({
     gridTemplateRows: 'auto auto',
     textDecoration: 'none',
     width: 280,
+
+    '&:hover': {
+      borderColor: theme.palette.primary.main,
+    }
   },
   image: {
     borderRadius: '0.4rem 0.4rem 0 0',

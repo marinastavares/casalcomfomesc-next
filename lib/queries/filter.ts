@@ -12,11 +12,6 @@ export const GET_ALL_FILTERS_OPTIONS = gql`
       name
       slug
     }
-    filter @client {
-      cities
-      categories
-      search
-    }
     posts (orderBy: data_DESC) {
       data
       url
@@ -35,16 +30,6 @@ export const GET_ALL_FILTERS_OPTIONS = gql`
       notaMarina
       notaVinicius
       tags
-    }
-  }
-`
-
-export const GET_LOCAL_FILTER = gql`
-  query getClientFilter {
-    filter @client {
-      cities
-      categories
-      search
     }
   }
 `
@@ -100,6 +85,5 @@ export const handleQuery = ( filter: FilterProps) => {
 
 export const getFilterPost = (filter: FilterProps) =>   {
   const query = handleQuery(filter)
-  console.log("🚀 ~ file: filter.ts ~ line 103 ~ getFilterPost ~ query", query, filter)
   return gql`${query}`
 }

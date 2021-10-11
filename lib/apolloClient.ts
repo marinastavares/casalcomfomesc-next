@@ -17,7 +17,7 @@ const APOLLO_STATE_PROP_NAME = '__APOLLO_STATE__'
 
 let apolloClient: ApolloClient<NormalizedCacheObject> | undefined
 
-const createApolloClient = (headers: IncomingHttpHeaders | null = null) => {
+export const createApolloClient = (headers: IncomingHttpHeaders | null = null) => {
   // isomorphic fetch for passing the cookies along with each GraphQL request
   const enhancedFetch = (url: RequestInfo, init: RequestInit) => {
     return fetch(url, {
