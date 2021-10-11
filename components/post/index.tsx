@@ -44,7 +44,13 @@ const Post = ({ post }: Post) => {
     return null
   }
   return (
-    <Paper className={styles.post}>
+    <Paper
+      component="a"
+      href={post.url}
+      className={styles.post}
+      target="_blank"
+      rel="noreferrer"
+    >
       <Image
         src={post.thumbnail.url}
         alt={`Imagem do post ${post.id}`}

@@ -56,11 +56,11 @@ export const handleFilterHeader = (filter: FilterProps) => {
     header.query = `$search: String`
     header.where = `name_contains: $search`
   }
-  if (filter?.categories) {
+  if (filter?.categories?.length) {
     header.query = `${header.query.length ? `${header.query},` : ''} $categories: [String!]`
     header.where = `${header.where.length ? `${header.where},` : ''} category: { slug_in: $categories }`
   }
-  if (filter?.cities) {
+  if (filter?.cities?.length) {
     header.query = `${header.query.length ? `${header.query},`  : ''} $cities: [String!]`
     header.where = `${header.where.length ? `${header.where},`  : ''} city: { slug_in: $cities }`
   }
@@ -100,5 +100,6 @@ export const handleQuery = ( filter: FilterProps) => {
 
 export const getFilterPost = (filter: FilterProps) =>   {
   const query = handleQuery(filter)
+  console.log("🚀 ~ file: filter.ts ~ line 103 ~ getFilterPost ~ query", query, filter)
   return gql`${query}`
 }

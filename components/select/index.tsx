@@ -10,23 +10,21 @@ interface SelectProps {
   options: optionsProps[]
   label: string
   name: string
-  getNewPosts: any
+  selected: string[]
+  handleChange: (name: string, value: string) => void
 }
 
-const BasicSelect = ({ options, label, name, getNewPosts }: SelectProps) => {
+const BasicSelect = ({
+  options,
+  label,
+  selected,
+  name,
+  handleChange,
+}: SelectProps) => {
   const styles = useStyles()
-  const {
-    filter: selected,
-    handleChange,
-    handleSelectAll,
-  } = useFilter(name, getNewPosts)
 
   const handleChip = (value: string) => () => {
-    handleChange(value)
-  }
-
-  const handleSelect = () => {
-    handleSelectAll(options)
+    handleChange(name, value)
   }
 
   if (!options?.length) {
@@ -36,13 +34,8 @@ const BasicSelect = ({ options, label, name, getNewPosts }: SelectProps) => {
   return (
     <Grid className={styles.container}>
       <Typography component="h2" variant="body1" color="secondary">
-        Filtro por {label}
+        {label}
       </Typography>
-      {!!selected.length && (
-        <Typography component="h2" variant="body2" color="secondary">
-          {selected.length} selecionados
-        </Typography>
-      )}
       <Grid className={styles.chips}>
         {options.map((option) => (
           <Chip
@@ -54,13 +47,6 @@ const BasicSelect = ({ options, label, name, getNewPosts }: SelectProps) => {
           />
         ))}
       </Grid>
-      <Chip
-        className={styles.selectAll}
-        color={selected.length === options.length ? 'primary' : 'secondary'}
-        variant="outlined"
-        onClick={handleSelect}
-        label="Selecionar todos"
-      />
     </Grid>
   )
 }

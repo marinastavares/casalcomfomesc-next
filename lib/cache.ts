@@ -13,16 +13,4 @@ export const filterVar = makeVar<Filter>(
   filterInitialValue
 )
 
-export const cache: InMemoryCache = new InMemoryCache({
-  typePolicies: {
-    Query: {
-      fields: {
-        filter: {
-          read () {
-            return filterVar()
-          }
-        }
-      }
-    }
-  }
-})
+export const cache: InMemoryCache = new InMemoryCache()
