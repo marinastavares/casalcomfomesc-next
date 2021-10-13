@@ -8,15 +8,6 @@ const useStyles = makeStyles((theme: DefaultTheme) => ({
     gridTemplateRows: 'auto',
     gridTemplateAreas: "'header header header' '. content . '",
   },
-  header: {
-    gridArea: 'header',
-    backgroundColor: '#ff8f63',
-    padding: 32,
-    marginBottom: 32,
-    display: 'flex',
-    alignItems: 'center',
-    gap: 16,
-  },
   titleHeader: {
     color: 'white',
   },
@@ -60,6 +51,17 @@ const useStyles = makeStyles((theme: DefaultTheme) => ({
   recommendation: {
     color: 'white',
     borderColor: 'white',
+    marginLeft: 'auto',
+  },
+  link: {
+    color: 'white',
+    marginLeft: 8,
+  },
+  underlined: {
+    textDecoration: 'underline',
+    fontWeight: 500,
+  },
+  links: {
     marginLeft: 'auto',
   }
 }))

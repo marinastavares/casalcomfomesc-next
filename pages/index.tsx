@@ -1,9 +1,11 @@
 import type { NextPage } from 'next'
-import { ChangeEvent, useCallback, useState, ReactElement } from 'react'
+import { ChangeEvent, useCallback, useState } from 'react'
 import { useQuery, useLazyQuery, useReactiveVar } from '@apollo/client'
 import { Grid, TextField, Typography, Button } from '@mui/material'
 import { useDebouncedCallback } from 'use-debounce'
 import SearchIcon from '@mui/icons-material/Search'
+import RecommendIcon from '@mui/icons-material/Recommend'
+import Link from 'next/link'
 
 import { GET_ALL_FILTERS_OPTIONS, getFilterPost } from '../lib/queries/filter'
 import Post from '../components/post'
@@ -13,6 +15,7 @@ import Loading from '../components/loading'
 import Dialog from '../components/dialog/filter'
 import RecommendationDialog from '../components/dialog/recommendation'
 import Chip from '../components/chip'
+import AppLayout from '../layout/app'
 
 import useStyles from '../styles/styles'
 import useBoolean from '../hooks/useBoolean'
@@ -92,7 +95,7 @@ const Home: NextPage = () => {
   }
 
   return (
-    <>
+    <AppLayout>
       <TextField
         placeholder="Busque o restaurante"
         className={styles.search}
@@ -108,6 +111,7 @@ const Home: NextPage = () => {
           color="secondary"
           className={styles.filterButton}
           onClick={handleRecommendationModal}
+          startIcon={<RecommendIcon />}
         >
           Recomendar
         </Button>
@@ -117,18 +121,22 @@ const Home: NextPage = () => {
           variant="outlined"
           onClick={handleModal}
         >
-          Mais filtros
+          Filtros
         </Button>
-        {Object.entries(variables).map(([key, typeOfFilter]) =>
-          typeOfFilter.map((value: string) => (
-            <Chip
-              key={value}
-              slug={value}
-              label={noFilterData[key].find((type) => type.slug === value).name}
-              name={key}
-              handleChange={handleRemoveFilter}
-            />
-          ))
+        {Object.entries(variables).map(
+          ([key, typeOfFilter]) =>
+            Array.isArray(typeOfFilter) &&
+            typeOfFilter.map((value: string) => (
+              <Chip
+                key={value}
+                slug={value}
+                label={
+                  noFilterData[key].find((type) => type.slug === value).name
+                }
+                name={key}
+                handleChange={handleRemoveFilter}
+              />
+            ))
         )}
       </Grid>
 
@@ -143,7 +151,12 @@ const Home: NextPage = () => {
               ))
             ) : (
               <Typography color="primary" component="h1" variant="body1">
-                Ainda não visitamos essas opções
+                Ainda não visitamos essas opções, já deu uma olhada na nossa
+                lista de{' '}
+                <Link href="/recomendacoes">
+                  <a>recomendações?</a>
+                </Link>{' '}
+                ?
               </Typography>
             )}
           </Grid>
@@ -159,7 +172,7 @@ const Home: NextPage = () => {
       {isRecommendationModalOpen && (
         <RecommendationDialog onClose={handleRecommendationModal} />
       )}
-    </>
+    </AppLayout>
   )
 }
 

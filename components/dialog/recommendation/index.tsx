@@ -17,6 +17,8 @@ import { useQuery, useMutation } from '@apollo/client'
 import { styled } from '@mui/material/styles'
 import { SelectChangeEvent } from '@mui/material/Select'
 import { toast } from 'react-toastify'
+import Link from 'next/link'
+import { event as eventGA } from '../../../utils/ga'
 
 import { GET_ALL_FILTERS_OPTIONS } from '../../../lib/queries/filter'
 import Dialog from '../index'
@@ -72,15 +74,18 @@ const CustomizedDialogs = ({
     {
       onCompleted: () => {
         onClose()
-        toast('Recomendação feita com sucesso, valeuuuu', {
-          position: 'bottom-left',
-          autoClose: 5000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-        })
+        toast(
+          'Recomendação feita com sucesso, vamos revisar e logo estará aqui',
+          {
+            position: 'bottom-left',
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+          }
+        )
       },
       onError: () => {
         toast.error('Alguma coisa deu errado, tente novamente mais tarde', {
@@ -128,6 +133,9 @@ const CustomizedDialogs = ({
       if (Object.values(errors).some((value) => value)) {
         return
       }
+      eventGA({
+        action: 'gaveRecommendation',
+      })
       createRecommendation({ variables: values })
     },
     [createRecommendation, errors, values]
@@ -140,10 +148,17 @@ const CustomizedDialogs = ({
       ) : (
         <form onSubmit={handleForm}>
           <Content dividers>
-            <Typography component="h3" variant="body2">
+            <Typography color="secondary" component="h3" variant="body2">
               Estamos sempre aberto a recomendações de novos lugares para
               experimentar! Deixe aqui a sua sugestão para explorarmos o quanto
-              antes
+              antes. Sua recomendação será avaliada por nós e depois adicionada
+              na parte de{' '}
+              <Typography component="a" variant="body2" color="primary">
+                <Link href="/recomendacoes">
+                  <a>recomendações</a>
+                </Link>{' '}
+              </Typography>
+              do nosso site
             </Typography>
             {Object.values(RECOMMENDATION_FIELDS).map((name: string) => {
               if (

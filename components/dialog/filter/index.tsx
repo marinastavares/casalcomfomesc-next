@@ -1,13 +1,14 @@
 import { useState, useCallback } from 'react'
 import Button from '@mui/material/Button'
-import Dialog from '../index'
 import DialogContent from '@mui/material/DialogContent'
 import DialogActions from '@mui/material/DialogActions'
 import CircularProgress from '@mui/material/CircularProgress'
-import Select from '../../select'
 import { useQuery, useReactiveVar } from '@apollo/client'
-import { GET_ALL_FILTERS_OPTIONS } from '../../../lib/queries/filter'
 
+import { GET_ALL_FILTERS_OPTIONS } from '../../../lib/queries/filter'
+import { event } from '../../../utils/ga'
+import Select from '../../select'
+import Dialog from '../index'
 import { filterVar } from '../../../lib/cache'
 import Loading from '../../loading'
 import { DialogProps } from '../types'
@@ -41,6 +42,10 @@ const CustomizedDialogs = ({
   )
 
   const handleFilter = useCallback(() => {
+    event({
+      action: 'filter',
+      params: filter,
+    })
     filterVar(filter)
     getNewPosts()
   }, [filter, getNewPosts])
